@@ -88,7 +88,7 @@ export default function Page() {
           <SwiperSlide>
             <div className="relative h-screen w-full">
               <img
-                src="/pastor3-hero.png"
+                src="/hero16.png"
                 alt="Pastor Biniyam Tekle"
                 className="absolute inset-0 h-full w-full object-cover object-right"
               />
@@ -169,7 +169,31 @@ export default function Page() {
                       Worship with us this Sunday at 11AM
                     </h1>
                     <p className="mt-8">
-                      Experience faith, fellowship, and community. We gather to praise, learn,
+                      Experience faith, fellowship, and community. We gather to
+                      praise, learn, and grow
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className="relative h-screen w-full">
+              <img
+                src="/hero14.png"
+                alt="Church worship"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60" />
+              <div className="relative z-10 flex h-full items-center">
+                <div className="mx-auto w-full max-w-7xl px-6">
+                  <div className="max-w-xl text-white">
+                    <h1 className="text-4xl font-bold md:text-6xl">
+                      Worship with us this Sunday at 11AM
+                    </h1>
+                    <p className="mt-8">
+                      Lead by Pastor Biniam Teklee, we gather to praise, learn,
                       and grow
                     </p>
                   </div>
