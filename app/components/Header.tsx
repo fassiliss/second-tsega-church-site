@@ -87,42 +87,42 @@ export default function Header() {
               <nav className="hidden items-center gap-6 md:flex">
                 <Link
                   href="/"
-                  className="text-sm font-medium text-slate-700 transition hover:text-purple-700"
+                  className="text-sm font-semibold  text-slate-700 transition hover:text-purple-700"
                 >
                   Home
                 </Link>
 
                 <Link
                   href="/ministries"
-                  className="text-sm font-medium text-slate-700 transition hover:text-purple-700"
+                  className="text-sm font-semibold  text-slate-700 transition hover:text-purple-700"
                 >
                   Ministries
                 </Link>
 
                 <Link
                   href="/#sermons"
-                  className="text-sm font-medium text-slate-700 transition hover:text-purple-700"
+                  className="text-sm font-semibold  text-slate-700 transition hover:text-purple-700"
                 >
                   Sermons
                 </Link>
 
                 <Link
                   href="/#events"
-                  className="text-sm font-medium text-slate-700 transition hover:text-purple-700"
+                  className="text-sm font-semibold  text-slate-700 transition hover:text-purple-700"
                 >
                   Events
                 </Link>
 
                 <Link
                   href="/contact"
-                  className="text-sm font-medium text-slate-700 transition hover:text-purple-700"
+                  className="text-sm font-semibold  text-slate-700 transition hover:text-purple-700"
                 >
                   Contact
                 </Link>
 
                 <Link
                   href="/donate"
-                  className="text-sm font-medium text-slate-700 transition hover:text-purple-700"
+                  className="text-sm font-semibold  text-slate-700 transition hover:text-purple-700"
                 >
                   Donate
                 </Link>
