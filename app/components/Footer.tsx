@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
 
@@ -22,29 +23,29 @@ export default function Footer() {
             </h4>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <a href="#" className="hover:text-purple-400">
+                <Link href="/" className="hover:text-purple-400">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#services" className="hover:text-purple-400">
+                <Link href="/ministries" className="hover:text-purple-400">
                   Ministries
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#sermons" className="hover:text-purple-400">
+                <Link href="/sermons" className="hover:text-purple-400">
                   Sermons
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#events" className="hover:text-purple-400">
+                <Link href="/#events" className="hover:text-purple-400">
                   Events
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="hover:text-purple-400">
+                <Link href="/contact" className="hover:text-purple-400">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

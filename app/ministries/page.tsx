@@ -1,147 +1,175 @@
-export default function MinistriesPage() {
-  const ministries = [
-    {
-      title: "Sunday Worship",
-      description:
-        "Join us every Sunday for worship, prayer, teaching, and fellowship as we gather together in Christ.",
-    },
-    {
-      title: "Bible Study",
-      description:
-        "Grow deeper in God’s Word through weekly Bible study, discussion, and spiritual encouragement.",
-    },
-    {
-      title: "Youth Ministry",
-      description:
-        "A place for young people to learn, connect, serve, and build strong faith in a supportive community.",
-    },
-    {
-      title: "Prayer Ministry",
-      description:
-        "Come together in prayer for the church, families, the community, and the needs of one another.",
-    },
-    {
-      title: "Community Outreach",
-      description:
-        "Serving others through compassion, encouragement, and practical support in the local community.",
-    },
-    {
-      title: "Family Fellowship",
-      description:
-        "Strengthening families and relationships through fellowship, care, and shared life in the church.",
-    },
-  ];
+import Image from "next/image";
+import Link from "next/link";
+import { Cross } from "lucide-react";
 
+type Ministry = {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  theme: "dark" | "purple";
+};
+
+const ministries: Ministry[] = [
+  {
+    title: "Women's Ministry",
+    description:
+      "The Women’s Ministry is a Christ-centered space where women grow in faith, encourage one another, and walk together in prayer, fellowship, and God’s Word. We seek to strengthen women in every season of life and help them flourish in their calling.",
+    image: "/hero11.png",
+    href: "/ministries/womens-ministry",
+    theme: "dark",
+  },
+  {
+    title: "Family Ministry",
+    description:
+      "Our Family Ministry exists to strengthen homes through biblical teaching, encouragement, prayer, and fellowship. We support marriages, parents, and children as they grow together in Christ.",
+    image: "/hero5.png",
+    href: "/ministries/family-ministry",
+    theme: "purple",
+  },
+  {
+    title: "Youth Ministry",
+    description:
+      "The Youth Ministry helps young people know Jesus personally, grow in faith, build strong friendships, and live boldly for Christ in everyday life. We are committed to discipleship, leadership, and purpose.",
+    image: "/hero9.png",
+    href: "/ministries/youth-ministry",
+    theme: "dark",
+  },
+  {
+    title: "Children's Ministry",
+    description:
+      "Our Children’s Ministry creates a safe, joyful, and loving environment where children learn God’s Word, worship with gladness, and begin a lifelong journey of faith in Jesus.",
+    image: "/hero14.png",
+    href: "/ministries/children-ministry",
+    theme: "purple",
+  },
+  {
+    title: "Prayer Ministry",
+    description:
+      "The Prayer Ministry leads the church in faithful prayer, intercession, and dependence on God. We gather to seek the Lord for healing, revival, wisdom, and the spiritual growth of our church and community.",
+    image: "/hero16.png",
+    href: "/ministries/prayer-ministry",
+    theme: "dark",
+  },
+];
+
+export default function MinistriesPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900">
-      <section className="bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-20">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-purple-700">
+    <main className="bg-white text-slate-900">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-slate-950 text-white">
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-purple-900/70" />
+        <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
+          <p className="text-sm text-white/70">
+            <span className="text-purple-400">Home</span>
+            <span className="mx-2">•</span>
             Ministries
           </p>
 
-          <h1 className="mt-3 max-w-5xl text-4xl font-bold tracking-tight md:text-6xl">
-            Serving the church and community through faith, prayer, and
-            fellowship
+          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
+            Ministries
           </h1>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            Our ministries help people grow spiritually, serve others, and stay
-            connected in the life of the church. There is a place for everyone
-            to worship, learn, pray, and participate.
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/75">
+            Discover the ministries of Grace Ethiopian Evangelical Church of
+            Nashville and find a place to grow, serve, and belong.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {ministries.map((ministry) => (
-            <article
+      {/* Divider icon */}
+      <div className="relative z-10 -mt-8 flex justify-center">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-purple-700 text-white shadow-xl ring-8 ring-white">
+          <Cross size={22} />
+        </div>
+      </div>
+
+      {/* Ministry Sections */}
+      <section>
+        {ministries.map((ministry, index) => {
+          const reverse = index % 2 === 1;
+          const isPurple = ministry.theme === "purple";
+
+          return (
+            <section
               key={ministry.title}
-              className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-purple-400"
+              className={`relative overflow-hidden ${
+                isPurple
+                  ? "bg-purple-700 text-white"
+                  : "bg-slate-950 text-white"
+              }`}
             >
-              <h2 className="text-2xl font-semibold text-purple-700">
-                {ministry.title}
-              </h2>
-              <p className="mt-4 leading-8 text-slate-600">
-                {ministry.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
+              <div
+                className={`absolute inset-0 ${
+                  isPurple
+                    ? "bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_30%)]"
+                    : "bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.18),transparent_30%)]"
+                }`}
+              />
 
-      <section className="bg-slate-50">
-        <div className="mx-auto max-w-7xl px-6 py-20">
-          <div className="grid gap-10 rounded-[2rem] bg-purple-700 p-8 text-white shadow-lg md:grid-cols-3 md:p-12">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-purple-200">
-                Worship
-              </p>
-              <h3 className="mt-3 text-3xl font-bold">Sunday Gathering</h3>
-              <p className="mt-4 text-lg leading-8 text-purple-100">
-                Join us every Sunday from 11:00 AM to 1:00 PM for worship and
-                the Word.
-              </p>
-            </div>
+              <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
+                <div
+                  className={`grid items-center gap-10 lg:grid-cols-2 ${
+                    reverse ? "lg:[&>*:first-child]:order-2" : ""
+                  }`}
+                >
+                  {/* Image */}
+                  <div>
+                    <div className="relative h-[280px] overflow-hidden rounded-[22px] border border-white/20 bg-white/5 shadow-2xl md:h-[340px]">
+                      <Image
+                        src={ministry.image}
+                        alt={ministry.title}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-purple-200">
-                Growth
-              </p>
-              <h3 className="mt-3 text-3xl font-bold">Bible & Prayer</h3>
-              <p className="mt-4 text-lg leading-8 text-purple-100">
-                Grow in faith through teaching, prayer, and fellowship
-                throughout the week.
-              </p>
-            </div>
+                  {/* Content */}
+                  <div className="max-w-2xl">
+                    <p
+                      className={`text-sm font-semibold uppercase tracking-[0.28em] ${
+                        isPurple ? "text-purple-100" : "text-purple-300"
+                      }`}
+                    >
+                      Ministry
+                    </p>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-purple-200">
-                Community
-              </p>
-              <h3 className="mt-3 text-3xl font-bold">Serve Together</h3>
-              <p className="mt-4 text-lg leading-8 text-purple-100">
-                Be part of a church family that serves one another and reaches
-                out with love.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+                    <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
+                      {ministry.title}
+                    </h2>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-500">
-            Get Involved
-          </p>
+                    <div
+                      className={`mt-4 h-1 w-16 rounded-full ${
+                        isPurple ? "bg-white/80" : "bg-purple-500"
+                      }`}
+                    />
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
-            There is a place for you in ministry
-          </h2>
+                    <p
+                      className={`mt-6 max-w-xl text-base leading-8 ${
+                        isPurple ? "text-white/85" : "text-white/75"
+                      }`}
+                    >
+                      {ministry.description}
+                    </p>
 
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-            Whether you want to join worship, Bible study, youth ministry, or
-            prayer gatherings, we would love to connect with you and help you
-            get involved.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="/contact"
-              className="rounded-full bg-purple-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-800"
-            >
-              Contact the Church
-            </a>
-
-            <a
-              href="/contact#map"
-              className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-100"
-            >
-              Visit Us
-            </a>
-          </div>
-        </div>
+                    <Link
+                      href={ministry.href}
+                      className={`mt-8 inline-flex rounded-full border px-6 py-3 text-sm font-semibold transition ${
+                        isPurple
+                          ? "border-white/40 text-white hover:bg-white hover:text-purple-700"
+                          : "border-purple-400 text-white hover:bg-purple-700"
+                      }`}
+                    >
+                      Know More
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
       </section>
     </main>
   );

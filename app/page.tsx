@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectFade, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -7,6 +9,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
+
+type Sermon = {
+  id: string;
+  title: string;
+  description: string;
+  preacher: string;
+  date: string;
+  youtubeUrl: string;
+  category: string;
+};
+
 export default function Page() {
   const ministries = [
     {
@@ -23,18 +36,36 @@ export default function Page() {
     },
   ];
 
-  const sermons = [
+  const sermons: Sermon[] = [
     {
+      id: "1",
       title: "Walking in Faith",
-      meta: "Latest message • Sunday Service",
+      description:
+        "A message about trusting God in every season and staying rooted in Christ.",
+      preacher: "Pastor Biniam Tekle",
+      date: "2026-04-14",
+      youtubeUrl: "https://www.youtube.com/watch?v=H_YBVWUqFkw",
+      category: "Sunday Service",
     },
     {
+      id: "2",
       title: "The Power of Prayer",
-      meta: "Featured sermon • Midweek Fellowship",
+      description:
+        "An encouraging message about prayer, perseverance, and seeking God together.",
+      preacher: "Pastor Biniam Tekle",
+      date: "2026-04-07",
+      youtubeUrl: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+      category: "Midweek Fellowship",
     },
     {
+      id: "3",
       title: "Hope in Christ",
-      meta: "Special message • Community Gathering",
+      description:
+        "A special message on hope, grace, and the promises of God for His people.",
+      preacher: "Pastor Biniam Tekle",
+      date: "2026-03-31",
+      youtubeUrl: "https://www.youtube.com/watch?v=ScMzIvxBSi4",
+      category: "Special Message",
     },
   ];
 
@@ -42,7 +73,7 @@ export default function Page() {
     {
       day: "SUN",
       title: "Morning Worship Service",
-      time: "9:00 AM - 11:30 AM",
+      time: "11:00 AM - 1:00 PM",
     },
     {
       day: "WED",
@@ -56,16 +87,48 @@ export default function Page() {
     },
   ];
 
+  const getYoutubeEmbedUrl = (url: string) => {
+    if (!url) return "";
+
+    if (url.includes("youtube.com/watch?v=")) {
+      const videoId = url.split("v=")[1]?.split("&")[0];
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+    }
+
+    if (url.includes("youtu.be/")) {
+      const videoId = url.split("youtu.be/")[1]?.split("?")[0];
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+    }
+
+    if (url.includes("youtube.com/embed/")) {
+      return url;
+    }
+
+    return "";
+  };
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+
+    if (Number.isNaN(date.getTime())) return "TBA";
+
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
   return (
     <main className="min-h-screen bg-white text-slate-900">
       <section className="relative">
-        <div className="custom-prev absolute left-5 top-1/2 z-20 -translate-y-1/2 cursor-pointer">
+        <div className="custom-prev absolute left-5 top-1/2 z-20 hidden -translate-y-1/2 cursor-pointer md:block">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-700 text-white shadow-lg transition hover:bg-purple-800">
             <ChevronLeft size={16} />
           </div>
         </div>
 
-        <div className="custom-next absolute right-5 top-1/2 z-20 -translate-y-1/2 cursor-pointer">
+        <div className="custom-next absolute right-5 top-1/2 z-20 hidden -translate-y-1/2 cursor-pointer md:block">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-700 text-white shadow-lg transition hover:bg-purple-800">
             <ChevronRight size={16} />
           </div>
@@ -83,14 +146,17 @@ export default function Page() {
             delay: 4000,
             disableOnInteraction: false,
           }}
-          className="h-screen relative"
+          className="relative h-screen"
         >
           <SwiperSlide>
-            <div className="relative h-screen w-full">
-              <img
+            <div className="relative h-screen w-full bg-slate-950">
+              <Image
                 src="/hero16.png"
-                alt="Pastor Biniyam Tekle"
-                className="absolute inset-0 h-full w-full object-cover object-right"
+                alt="Pastor Biniam Tekle"
+                fill
+                priority
+                sizes="100vw"
+                className="absolute inset-0 h-full w-full object-contain object-center md:object-cover md:object-right"
               />
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative z-10 flex h-full items-center">
@@ -99,7 +165,6 @@ export default function Page() {
                     <h1 className="text-4xl font-bold md:text-6xl">
                       Grace Ethiopian Evangelical Church of Nashville
                     </h1>
-                    {/* <p className="mt-4">Led by Pastor Biniam Teklee</p> */}
                     <p className="mt-2">Sunday Service • 11:00 AM - 1:00 PM</p>
                   </div>
                 </div>
@@ -108,11 +173,13 @@ export default function Page() {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="relative h-screen w-full">
-              <img
+            <div className="relative h-screen w-full bg-slate-950">
+              <Image
                 src="/hero5.png"
                 alt="Church worship"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="100vw"
+                className="absolute inset-0 h-full w-full object-contain object-center md:object-cover"
               />
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative z-10 flex h-full items-center">
@@ -131,11 +198,13 @@ export default function Page() {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="relative h-screen w-full">
-              <img
+            <div className="relative h-screen w-full bg-slate-950">
+              <Image
                 src="/hero9.png"
                 alt="Church worship"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="100vw"
+                className="absolute inset-0 h-full w-full object-contain object-center md:object-cover"
               />
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative z-10 flex h-full items-center">
@@ -145,7 +214,7 @@ export default function Page() {
                       Worship with us this Sunday at 11AM
                     </h1>
                     <p className="mt-8">
-                      Lead by Pastor Biniam Teklee, we gather to praise, learn,
+                      Led by Pastor Biniam Tekle, we gather to praise, learn,
                       and grow
                     </p>
                   </div>
@@ -155,11 +224,13 @@ export default function Page() {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="relative h-screen w-full">
-              <img
+            <div className="relative h-screen w-full bg-slate-950">
+              <Image
                 src="/hero11.png"
                 alt="Church worship"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="100vw"
+                className="absolute inset-0 h-full w-full object-contain object-center md:object-cover"
               />
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative z-10 flex h-full items-center">
@@ -179,11 +250,13 @@ export default function Page() {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="relative h-screen w-full">
-              <img
+            <div className="relative h-screen w-full bg-slate-950">
+              <Image
                 src="/hero14.png"
                 alt="Church worship"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="100vw"
+                className="absolute inset-0 h-full w-full object-contain object-center md:object-cover"
               />
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative z-10 flex h-full items-center">
@@ -193,7 +266,7 @@ export default function Page() {
                       Worship with us this Sunday at 11AM
                     </h1>
                     <p className="mt-8">
-                      Lead by Pastor Biniam Teklee, we gather to praise, learn,
+                      Led by Pastor Biniam Tekle, we gather to praise, learn,
                       and grow
                     </p>
                   </div>
@@ -235,31 +308,64 @@ export default function Page() {
                 Recent Sermons
               </p>
               <h3 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-                Share teaching and encouragement online.
+                Watch recent messages and grow in God&apos;s Word.
               </h3>
             </div>
-            <a
-              href="#"
+            <Link
+              href="/sermons"
               className="text-sm font-semibold text-slate-800 underline underline-offset-4"
             >
               View all sermons
-            </a>
+            </Link>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {sermons.map((sermon) => (
               <article
-                key={sermon.title}
-                className="rounded-3xl bg-white p-7 shadow-sm ring-1 ring-slate-200 hover:ring-purple-300"
+                key={sermon.id}
+                className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 transition hover:ring-purple-300"
               >
-                <p className="text-sm text-slate-500">{sermon.meta}</p>
-                <h4 className="mt-3 text-2xl font-semibold tracking-tight">
-                  {sermon.title}
-                </h4>
-                <p className="mt-4 leading-7 text-slate-600">
-                  This card can later link to sermon details, audio, video, or
-                  notes.
-                </p>
+                <div className="aspect-video bg-black">
+                  <iframe
+                    className="h-full w-full"
+                    src={getYoutubeEmbedUrl(sermon.youtubeUrl)}
+                    title={sermon.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+
+                <div className="p-7">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700">
+                      {sermon.category}
+                    </span>
+                    <span className="text-sm text-slate-500">
+                      {formatDate(sermon.date)}
+                    </span>
+                  </div>
+
+                  <h4 className="mt-4 text-2xl font-semibold tracking-tight">
+                    {sermon.title}
+                  </h4>
+
+                  <p className="mt-2 text-sm font-medium text-purple-700">
+                    {sermon.preacher}
+                  </p>
+
+                  <p className="mt-4 leading-7 text-slate-600">
+                    {sermon.description}
+                  </p>
+
+                  <a
+                    href={sermon.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-500"
+                  >
+                    Watch on YouTube
+                  </a>
+                </div>
               </article>
             ))}
           </div>
@@ -308,32 +414,49 @@ export default function Page() {
               <p>Phone: +615 485 1516</p>
               <p>Address: 5227 Murfreesboro Rd, La Vergne, TN 37086</p>
             </div>
-            <form className="mt-8 space-y-4">
+            <form
+              action="mailto:gec5227@gmail.com"
+              method="post"
+              encType="text/plain"
+              className="mt-8 space-y-4"
+            >
               <input
+                name="name"
                 type="text"
                 placeholder="Your name"
+                autoComplete="name"
+                required
+                maxLength={120}
                 className="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none placeholder:text-slate-400"
               />
               <input
+                name="email"
                 type="email"
                 placeholder="Your email"
+                autoComplete="email"
+                required
+                maxLength={160}
                 className="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none placeholder:text-slate-400"
               />
               <textarea
+                name="message"
                 placeholder="Your message"
                 rows={5}
+                required
+                maxLength={2000}
                 className="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none placeholder:text-slate-400"
               />
               <button
-                type="button"
-                className="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-purple-700 transition hover:bg-purple-100 hover:-translate-y-0.5"
+                type="submit"
+                className="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-purple-700 transition hover:-translate-y-0.5 hover:bg-purple-100"
               >
-                Send Message
+                Email Church Office
               </button>
             </form>
           </aside>
         </div>
       </section>
+
       <section id="donate" className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="grid items-center gap-10 rounded-3xl bg-purple-700 p-8 text-white shadow-lg md:grid-cols-2 md:p-12">
@@ -370,12 +493,9 @@ export default function Page() {
                   <p className="mt-1 text-base text-slate-700">
                     Add your secure donation link here.
                   </p>
-                  <a
-                    href="#"
-                    className="mt-3 inline-block rounded-full bg-purple-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-purple-800"
-                  >
+                  <span className="mt-3 inline-block rounded-full bg-purple-700 px-5 py-2 text-sm font-semibold text-white">
                     Online Giving Coming Soon
-                  </a>
+                  </span>
                 </div>
 
                 <div className="rounded-2xl border border-slate-200 p-4">

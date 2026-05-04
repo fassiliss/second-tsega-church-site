@@ -74,7 +74,12 @@ export default function ContactPage() {
               Contact the church office
             </h2>
 
-            <form className="mt-10 space-y-6">
+            <form
+              action="mailto:gec5227@gmail.com"
+              method="post"
+              encType="text/plain"
+              className="mt-10 space-y-6"
+            >
               <div>
                 <label
                   htmlFor="name"
@@ -84,8 +89,12 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   placeholder="Your full name"
+                  autoComplete="name"
+                  required
+                  maxLength={120}
                   className="w-full rounded-3xl border border-slate-300 px-5 py-4 text-lg outline-none transition focus:border-purple-700"
                 />
               </div>
@@ -99,8 +108,12 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="you@example.com"
+                  autoComplete="email"
+                  required
+                  maxLength={160}
                   className="w-full rounded-3xl border border-slate-300 px-5 py-4 text-lg outline-none transition focus:border-purple-700"
                 />
               </div>
@@ -114,8 +127,11 @@ export default function ContactPage() {
                 </label>
                 <input
                   id="phone"
+                  name="phone"
                   type="text"
                   placeholder="(615) 000-0000"
+                  autoComplete="tel"
+                  maxLength={40}
                   className="w-full rounded-3xl border border-slate-300 px-5 py-4 text-lg outline-none transition focus:border-purple-700"
                 />
               </div>
@@ -129,17 +145,20 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={7}
                   placeholder="Write your message here..."
+                  required
+                  maxLength={2000}
                   className="w-full rounded-3xl border border-slate-300 px-5 py-4 text-lg outline-none transition focus:border-purple-700"
                 />
               </div>
 
               <button
-                type="button"
+                type="submit"
                 className="rounded-full bg-purple-700 px-8 py-4 text-base font-semibold text-white transition hover:bg-purple-800"
               >
-                Send Message
+                Email Church Office
               </button>
             </form>
           </div>
