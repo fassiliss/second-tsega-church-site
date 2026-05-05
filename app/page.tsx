@@ -77,13 +77,13 @@ export default function Page() {
     },
     {
       day: "WED",
-      title: "Bible Study & Prayer",
-      time: "6:00 PM - 7:30 PM",
+      title: "Youth Fellowship",
+      time: "6:00 PM - 8:00 PM",
     },
     {
       day: "SAT",
-      title: "Youth Fellowship",
-      time: "4:00 PM - 6:00 PM",
+      title: "Prayer Meeting",
+      time: "9:00 AM - 11:00 AM",
     },
   ];
 
